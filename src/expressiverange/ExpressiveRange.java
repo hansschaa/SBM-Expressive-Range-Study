@@ -4,6 +4,9 @@
  */
 package expressiverange;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  *
  * @author Hans
@@ -15,15 +18,39 @@ public class ExpressiveRange {
      */
     public static void main(String[] args) {
         
-        //Get Level
-        char[][] level = ImportTextFile.leerMatrizDesdeArchivo("level_1.txt");
-        
-        LevelData levelData = new LevelData(level);
-        levelData.ComputeMetrics();
+        ArrayList<LevelData> importedLevels = new ArrayList<>();
+        String csvFields = "ID;Empty Spaces Percentage;Negative Space Percentage;Interesting Elements Percentaje;Significant Jumps Count;Linearity;Leniency";
+    
+        String directory = "Levels"; // Directory containing the files
+        File folder = new File(directory);
 
-        levelData.ShowLevel();
-        levelData.ShowMetrics();
+        if (folder.exists() && folder.isDirectory()) {
+            File[] files = folder.listFiles();
+
+            if (files != null) {
+                int cont = 0;
+                for (File file : files) {
+                    if (file.isFile() && file.getName().endsWith(".txt")) {
+                        char[][] level = ImportTextFile.leerMatrizDesdeArchivo(directory + "\\" + file.getName());
+
+                        LevelData levelData = new LevelData(level, cont);
+                        levelData.ComputeMetrics();
+                        importedLevels.add(levelData);
+                        cont++;
+                    }
+                }
+            }
+        } else {
+            System.out.println("The folder does not exist or is not a valid directory.");
+        }
+
+        //Export LevelData to .csv
+        String[] levelDataList = new String[importedLevels.size()+1];
+        levelDataList[0] = csvFields;
+        for(int i = 0 ; i < importedLevels.size(); i++){
+            levelDataList[i+1] = importedLevels.get(i).GetData();
+        }
         
-        
+        ImportTextFile.exportDataToCSV(levelDataList, "data.csv");
     }
 }

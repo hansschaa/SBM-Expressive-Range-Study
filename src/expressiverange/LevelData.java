@@ -4,6 +4,8 @@
  */
 package expressiverange;
 
+import java.util.StringJoiner;
+
 /**
  *
  * @author Hans
@@ -11,6 +13,7 @@ package expressiverange;
 public class LevelData {
 
     public char[][] level;
+    public int id;
     public int totalTiles;
     //Alturas del nivel comenzando desde 0 (mas arriba) hasta 14 (la mas abajo, donde se ubica el suelo)
     public int[] heights;
@@ -21,8 +24,9 @@ public class LevelData {
     public int leniency;
     public float linearity;
     
-    public LevelData(char[][] level) {
+    public LevelData(char[][] level, int id) {
         this.level = level;
+        this.id = id;
         this.heights = Utils.GetHeightArray(level);
         this.totalTiles = Utils.GetTotalLevelTiles(level);
     }
@@ -48,5 +52,18 @@ public class LevelData {
     
     public void ShowLevel(){
         Utils.PrintLevel(level);
+    }
+
+    public String GetData() {
+        StringJoiner joiner = new StringJoiner(";");
+        joiner.add(String.valueOf(id))
+            .add(String.valueOf(emptySpacePercentage))
+            .add(String.valueOf(negativeSpacePercentage))
+            .add(String.valueOf(interestingElementsPercentaje))
+            .add(String.valueOf(significantJumpsCount))
+            .add(String.valueOf(linearity))
+            .add(String.valueOf(leniency));
+        var exData = joiner.toString().replace('.', ',');
+        return exData;
     }
 }

@@ -5,8 +5,11 @@
 package expressiverange;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -46,5 +49,18 @@ public class ImportTextFile {
         }
 
         return matriz;
+    }
+    
+    public static void exportDataToCSV(String[] dataList, String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (String data : dataList) {
+                writer.write(data);
+                writer.newLine();
+            }
+
+            System.out.println("Data successfully exported to " + fileName);
+        } catch (IOException e) {
+            System.err.println("Error exporting data to CSV: " + e.getMessage());
+        }
     }
 }
