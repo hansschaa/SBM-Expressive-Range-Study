@@ -18,6 +18,7 @@ public class LevelData {
     public float negativeSpacePercentage;
     public float interestingElementsPercentaje;
     public int significantJumpsCount;
+    public int leniency;
     
     public LevelData(char[][] level) {
         this.level = level;
@@ -30,6 +31,7 @@ public class LevelData {
         negativeSpacePercentage = MetricFactory.GetNegativeSpace(this);
         interestingElementsPercentaje = MetricFactory.GetInterestingTiles(this);
         significantJumpsCount = MetricFactory.GetSignificantJumps(this);
+        leniency = MetricFactory.GetLeniency(this);
     }
     
     public void ShowMetrics(){
@@ -38,6 +40,7 @@ public class LevelData {
         System.out.println("-> Negative Space: " + negativeSpacePercentage);
         System.out.println("-> Interesting Tiles: " + interestingElementsPercentaje);
         System.out.println("-> Significant Jumps: " + significantJumpsCount);
+        System.out.println("-> Leniency: " + leniency);
     }
     
     public void ShowLevel(){

@@ -71,4 +71,42 @@ public class MetricFactory {
 
         return significantJumps;
     }
+    
+    //Power ups:1
+    //Cañones, tubos de flores y espacios tienen un valor de −0.5
+    //Tortugas y grump: -1
+    //Spiny: -1.5
+    public static int GetLeniency(LevelData levelData){
+        int leniency = 0;
+        leniency += GetCharLeniency(levelData, 'E', -1);
+        leniency += GetCharLeniency(levelData, 'S', -1.5f);
+        leniency += GetCharLeniency(levelData, 'P', 1);
+        leniency += GetHoleLeniency(levelData);
+   
+        return leniency; 
+    }
+    
+    public static float GetCharLeniency(LevelData levelData, char character, float value){
+        float charLeniency = 0;
+        
+        for(int i = 0; i < levelData.level.length; i++){
+            for(int j = 0 ; j < levelData.level[0].length; j++){
+                if(levelData.level[i][j] == character)
+                    charLeniency+=value;
+            }
+        }
+        
+        return charLeniency;
+    }
+    
+    public static float GetHoleLeniency(LevelData levelData){
+        float holeLeniency = 0;
+        
+        for(int i = 0; i < levelData.heights.length; i++){
+            if(levelData.heights[i] == 0)
+                holeLeniency-=.5f;
+        }
+        
+        return holeLeniency;
+    }
 }
