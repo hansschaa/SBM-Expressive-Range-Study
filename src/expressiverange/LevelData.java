@@ -19,6 +19,7 @@ public class LevelData {
     public float interestingElementsPercentaje;
     public int significantJumpsCount;
     public int leniency;
+    public float linearity;
     
     public LevelData(char[][] level) {
         this.level = level;
@@ -32,6 +33,7 @@ public class LevelData {
         interestingElementsPercentaje = MetricFactory.GetInterestingTiles(this);
         significantJumpsCount = MetricFactory.GetSignificantJumps(this);
         leniency = MetricFactory.GetLeniency(this);
+        linearity = MetricFactory.GetLinearity(this);
     }
     
     public void ShowMetrics(){
@@ -41,6 +43,7 @@ public class LevelData {
         System.out.println("-> Interesting Tiles: " + interestingElementsPercentaje);
         System.out.println("-> Significant Jumps: " + significantJumpsCount);
         System.out.println("-> Leniency: " + leniency);
+        System.out.println("-> Linearity: " + linearity);
     }
     
     public void ShowLevel(){

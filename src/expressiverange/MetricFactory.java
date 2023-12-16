@@ -109,4 +109,16 @@ public class MetricFactory {
         
         return holeLeniency;
     }
+
+    static float GetLinearity(LevelData levelData) {
+        
+        float sumaDiferencias = 0;
+
+        for (int i = 0; i < levelData.heights.length - 1; i++) {
+            sumaDiferencias += Math.abs(levelData.heights[i] - levelData.heights[i + 1]);
+        }
+
+        float linealidad = sumaDiferencias / (levelData.heights.length - 1);
+        return linealidad;
+    }
 }
