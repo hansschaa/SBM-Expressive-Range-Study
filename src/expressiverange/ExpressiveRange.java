@@ -19,7 +19,7 @@ public class ExpressiveRange {
     public static void main(String[] args) {
         
         ArrayList<LevelData> importedLevels = new ArrayList<>();
-        String csvFields = "Filename;Empty Spaces Percentage;Negative Space Percentage;Interesting Elements Percentaje;Significant Jumps Count;Linearity;Leniency;Avg Enemy Compression;Density";
+        String csvFields = "Filename;Empty Spaces;Negative Space;Interesting Elements;Significant Jumps;Linearity;Leniency;Avg Enemy Comp;Density";
     
         String directory = "Levels"; // Directory containing the files
         File folder = new File(directory);
@@ -44,10 +44,15 @@ public class ExpressiveRange {
             System.out.println("The folder does not exist or is not a valid directory.");
         }
 
+        //Normalize
+        MetricFactory.ComputeMaximum(importedLevels);
+        
         //Export LevelData to .csv
         String[] levelDataList = new String[importedLevels.size()+1];
         levelDataList[0] = csvFields;
         for(int i = 0 ; i < importedLevels.size(); i++){
+            importedLevels.get(i).Normalize();
+            
             levelDataList[i+1] = importedLevels.get(i).GetData();
         }
         

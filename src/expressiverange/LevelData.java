@@ -21,8 +21,8 @@ public class LevelData {
     public float emptySpacePercentage;
     public float negativeSpacePercentage;
     public float interestingElementsPercentaje;
-    public int significantJumpsCount;
-    public int leniency;
+    public float significantJumpsCount;
+    public float leniency;
     public float linearity;
     public float avgEnemiesCompression;
     public float density;
@@ -75,5 +75,32 @@ public class LevelData {
             .add(String.valueOf(density));
         var exData = joiner.toString().replace('.', ',');
         return exData;
+    }
+
+    void Normalize() {
+        //Empty Space
+        emptySpacePercentage/=MetricFactory.maxEmptySpacePercentage;
+        
+        //Negative Space
+        negativeSpacePercentage/=MetricFactory.maxNegativeSpacePercentage;
+        
+        //Interesting tiles
+        interestingElementsPercentaje/=MetricFactory.maxInterestingElementsPercentaje;
+        
+        //Significant jumps
+        significantJumpsCount/=MetricFactory.maxSignificantJumpsCount;
+        
+        //Leniency
+        leniency/=MetricFactory.maxLeniency;
+        
+        //Linearity
+        linearity/=MetricFactory.maxLinearity;
+        
+        //Avg enemies
+        avgEnemiesCompression/=MetricFactory.maxAvgEnemiesCompression;
+        
+        //Density
+        density/=MetricFactory.maxDensity;
+                
     }
 }
