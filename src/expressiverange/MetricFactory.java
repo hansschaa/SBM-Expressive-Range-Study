@@ -123,20 +123,26 @@ public class MetricFactory {
     }
 
     static float GetEnemiesCompression(LevelData levelData) {
-        float totalDistance = 0;
-        float totalEnemies = 0;
+        int margin = 5;
+        float totalEnemies = Utils.CountLevelChars(levelData.level, new char[]{'E','S'});
+        float totalCompression = 0;
+        
         for (int j = 0; j < levelData.enemiesPos.length; j++) {
             if (levelData.enemiesPos[j] == 1) {
-                totalEnemies++;
-                for(int jj = 0; jj < levelData.enemiesPos.length; jj++){
+  
+                var bottomLimit = Math.max(0, j-margin);
+                var upperLimit = Math.min( j+margin,levelData.enemiesPos.length);
+
+                for(int jj = bottomLimit; jj < upperLimit ; jj++){
                     if(jj != j && levelData.enemiesPos[jj] == 1)
                     {
-                        totalDistance += Math.abs(j-jj);
+                        totalCompression += Math.abs(j-jj);
+                        System.out.println("");
                     }    
                 }
             }
         }
 
-        return totalDistance/ totalEnemies;
+        return totalCompression/ totalEnemies;
     }
 }

@@ -24,8 +24,7 @@ public class LevelData {
     public int significantJumpsCount;
     public int leniency;
     public float linearity;
-    public float avgEnemySparseness;
-    public float avgHoleSparseness;
+    public float avgEnemiesCompression;
     
     public LevelData(char[][] level, int id) {
         this.level = level;
@@ -42,7 +41,7 @@ public class LevelData {
         significantJumpsCount = MetricFactory.GetSignificantJumps(this);
         leniency = MetricFactory.GetLeniency(this);
         linearity = MetricFactory.GetLinearity(this);
-        avgEnemySparseness = MetricFactory.GetEnemiesCompression(this);
+        avgEnemiesCompression = MetricFactory.GetEnemiesCompression(this);
     }
     
     public void ShowMetrics(){
@@ -53,7 +52,7 @@ public class LevelData {
         System.out.println("-> Significant Jumps: " + significantJumpsCount);
         System.out.println("-> Leniency: " + leniency);
         System.out.println("-> Linearity: " + linearity);
-        System.out.println("-> Enemies Compression: " + avgEnemySparseness);
+        System.out.println("-> Enemies Compression: " + avgEnemiesCompression);
     }
     
     public void ShowLevel(){
@@ -69,7 +68,7 @@ public class LevelData {
             .add(String.valueOf(significantJumpsCount))
             .add(String.valueOf(linearity))
             .add(String.valueOf(leniency))
-            .add(String.valueOf(avgEnemySparseness));
+            .add(String.valueOf(avgEnemiesCompression));
         var exData = joiner.toString().replace('.', ',');
         return exData;
     }
