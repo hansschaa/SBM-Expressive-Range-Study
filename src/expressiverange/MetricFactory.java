@@ -121,4 +121,22 @@ public class MetricFactory {
         float linealidad = sumaDiferencias / (levelData.heights.length - 1);
         return linealidad;
     }
+
+    static float GetEnemiesCompression(LevelData levelData) {
+        float totalDistance = 0;
+        float totalEnemies = 0;
+        for (int j = 0; j < levelData.enemiesPos.length; j++) {
+            if (levelData.enemiesPos[j] == 1) {
+                totalEnemies++;
+                for(int jj = 0; jj < levelData.enemiesPos.length; jj++){
+                    if(jj != j && levelData.enemiesPos[jj] == 1)
+                    {
+                        totalDistance += Math.abs(j-jj);
+                    }    
+                }
+            }
+        }
+
+        return totalDistance/ totalEnemies;
+    }
 }

@@ -17,17 +17,21 @@ public class LevelData {
     public int totalTiles;
     //Alturas del nivel comenzando desde 0 (mas arriba) hasta 14 (la mas abajo, donde se ubica el suelo)
     public int[] heights;
+    public int[] enemiesPos;
     public float emptySpacePercentage;
     public float negativeSpacePercentage;
     public float interestingElementsPercentaje;
     public int significantJumpsCount;
     public int leniency;
     public float linearity;
+    public float avgEnemySparseness;
+    public float avgHoleSparseness;
     
     public LevelData(char[][] level, int id) {
         this.level = level;
         this.id = id;
         this.heights = Utils.GetHeightArray(level);
+        this.enemiesPos = Utils.GetEnemiesXArray(level); 
         this.totalTiles = Utils.GetTotalLevelTiles(level);
     }
 
@@ -38,6 +42,7 @@ public class LevelData {
         significantJumpsCount = MetricFactory.GetSignificantJumps(this);
         leniency = MetricFactory.GetLeniency(this);
         linearity = MetricFactory.GetLinearity(this);
+        avgEnemySparseness = MetricFactory.GetEnemiesCompression(this);
     }
     
     public void ShowMetrics(){
@@ -48,6 +53,7 @@ public class LevelData {
         System.out.println("-> Significant Jumps: " + significantJumpsCount);
         System.out.println("-> Leniency: " + leniency);
         System.out.println("-> Linearity: " + linearity);
+        System.out.println("-> Enemies Compression: " + avgEnemySparseness);
     }
     
     public void ShowLevel(){
@@ -62,7 +68,8 @@ public class LevelData {
             .add(String.valueOf(interestingElementsPercentaje))
             .add(String.valueOf(significantJumpsCount))
             .add(String.valueOf(linearity))
-            .add(String.valueOf(leniency));
+            .add(String.valueOf(leniency))
+            .add(String.valueOf(avgEnemySparseness));
         var exData = joiner.toString().replace('.', ',');
         return exData;
     }

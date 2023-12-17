@@ -64,4 +64,20 @@ public class Utils {
     public static int GetTotalLevelTiles(char[][] level){
         return level.length*level[0].length;
     }
+
+    static int[] GetEnemiesXArray(char[][] level) {
+        
+        int[] enemiesArray = new int[level[0].length];
+        
+        for(int j = 0 ; j < level[0].length; j++){
+            for(int i = 0 ; i < level.length; i++){
+                if(level[i][j] == 'E' || level[i][j] == 'S'){
+                    enemiesArray[j] = 1;
+                    break;
+                }
+            }
+        }
+        
+        return enemiesArray;
+    }
 }
