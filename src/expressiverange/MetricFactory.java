@@ -137,12 +137,35 @@ public class MetricFactory {
                     if(jj != j && levelData.enemiesPos[jj] == 1)
                     {
                         totalCompression += Math.abs(j-jj);
-                        System.out.println("");
                     }    
                 }
             }
         }
 
         return totalCompression/ totalEnemies;
+    }
+
+    public static float GetDensity(LevelData levelData) {
+        float density = 0;
+        for(int j = 0; j < levelData.level[0].length; j++){
+           for(int i =  levelData.level.length-1; i >0 ; i--){
+               if(levelData.level[i][j] == 'X'){
+                   density += GetCountColDensity(levelData.level, i,j);
+                   break;
+               }
+           }
+       }
+          
+       return density;
+    }
+    
+    static int GetCountColDensity(char[][] level, int i, int j){
+        int colCountDensity = 0;
+        
+        for(int ii = i-1 ; level[ii][j]== 'X'; ii--){
+            colCountDensity++;
+        }
+        
+        return colCountDensity;
     }
 }

@@ -9,7 +9,7 @@
 --------BBCC--C----C-----------B----CC----C-C-BBB-BPBBBB-------C----C-C-C---------BBBB------C------------------------
 ---------------------C-------C----------------------------------C-----BB--------------C------CBBB--------------------
 -----------BPP----C-C------------------------C--------------------------------------------BB-B-----------------------
-------E-----------------------S--------------B-ES-----------S------B-B----------------BBBB---------------------------
-XXXXXXXXXX--------------------XXXX-E----------XXXXXXXXXXXXXXXX------------XXXXXXXXXXXX----------------XXXX-----------
-XXXXXXXXXX-E----------XXXX---SXXXXXXXX---E----XXXXXXXXXXXXXXXX---E----XXXXXXXXXXXXXXXX--------XXXX----XXXX-----------
+------E-----------------------S--------------B-ES----SS----SS------B-B-------SE----ES-BBBB---------------------------
+XXXXXXXXXX-------------EE-----XXXX-EE---------XXXXXXXXXXXXXXXX---------EE-XXXXXXXXXXXX--------E-EE----XXXX-----------
+XXXXXXXXXX-EE----E----XXXX---SXXXXXXXX---E----XXXXXXXXXXXXXXXX---E----XXXXXXXXXXXXXXXX----S---XXXX----XXXX-----------
 XXXXXXXXXXXXXXXXXX----XXXXXXXXXXXXXXXXXXXX----XXXXXXXXXXXXXXXXXXXX----XXXXXXXXXXXXXXXX----XXXXXXXXXXXXXXXX-----------

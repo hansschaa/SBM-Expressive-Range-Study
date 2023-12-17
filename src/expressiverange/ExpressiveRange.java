@@ -19,7 +19,7 @@ public class ExpressiveRange {
     public static void main(String[] args) {
         
         ArrayList<LevelData> importedLevels = new ArrayList<>();
-        String csvFields = "ID;Empty Spaces Percentage;Negative Space Percentage;Interesting Elements Percentaje;Significant Jumps Count;Linearity;Leniency;Avg Enemy Compression";
+        String csvFields = "Filename;Empty Spaces Percentage;Negative Space Percentage;Interesting Elements Percentaje;Significant Jumps Count;Linearity;Leniency;Avg Enemy Compression;Density";
     
         String directory = "Levels"; // Directory containing the files
         File folder = new File(directory);
@@ -33,7 +33,7 @@ public class ExpressiveRange {
                     if (file.isFile() && file.getName().endsWith(".txt")) {
                         char[][] level = ImportTextFile.leerMatrizDesdeArchivo(directory + "\\" + file.getName());
 
-                        LevelData levelData = new LevelData(level, cont);
+                        LevelData levelData = new LevelData(level, file.getName());
                         levelData.ComputeMetrics();
                         importedLevels.add(levelData);
                         cont++;

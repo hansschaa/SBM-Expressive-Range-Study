@@ -13,7 +13,7 @@ import java.util.StringJoiner;
 public class LevelData {
 
     public char[][] level;
-    public int id;
+    public String filename;
     public int totalTiles;
     //Alturas del nivel comenzando desde 0 (mas arriba) hasta 14 (la mas abajo, donde se ubica el suelo)
     public int[] heights;
@@ -25,10 +25,11 @@ public class LevelData {
     public int leniency;
     public float linearity;
     public float avgEnemiesCompression;
+    public float density;
     
-    public LevelData(char[][] level, int id) {
+    public LevelData(char[][] level, String filename) {
         this.level = level;
-        this.id = id;
+        this.filename = filename;
         this.heights = Utils.GetHeightArray(level);
         this.enemiesPos = Utils.GetEnemiesXArray(level); 
         this.totalTiles = Utils.GetTotalLevelTiles(level);
@@ -42,6 +43,7 @@ public class LevelData {
         leniency = MetricFactory.GetLeniency(this);
         linearity = MetricFactory.GetLinearity(this);
         avgEnemiesCompression = MetricFactory.GetEnemiesCompression(this);
+        density = MetricFactory.GetDensity(this);
     }
     
     public void ShowMetrics(){
@@ -53,6 +55,7 @@ public class LevelData {
         System.out.println("-> Leniency: " + leniency);
         System.out.println("-> Linearity: " + linearity);
         System.out.println("-> Enemies Compression: " + avgEnemiesCompression);
+        System.out.println("-> Density: " + density);
     }
     
     public void ShowLevel(){
@@ -61,14 +64,15 @@ public class LevelData {
 
     public String GetData() {
         StringJoiner joiner = new StringJoiner(";");
-        joiner.add(String.valueOf(id))
+        joiner.add(String.valueOf(filename))
             .add(String.valueOf(emptySpacePercentage))
             .add(String.valueOf(negativeSpacePercentage))
             .add(String.valueOf(interestingElementsPercentaje))
             .add(String.valueOf(significantJumpsCount))
             .add(String.valueOf(linearity))
             .add(String.valueOf(leniency))
-            .add(String.valueOf(avgEnemiesCompression));
+            .add(String.valueOf(avgEnemiesCompression))
+            .add(String.valueOf(density));
         var exData = joiner.toString().replace('.', ',');
         return exData;
     }
