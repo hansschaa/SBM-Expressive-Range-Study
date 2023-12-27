@@ -51,6 +51,9 @@ public class ImportTextFile {
     }
     
     public static void exportDataToCSV(String[] dataList, String fileName) {
+        
+
+        
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (String data : dataList) {
                 writer.write(data);

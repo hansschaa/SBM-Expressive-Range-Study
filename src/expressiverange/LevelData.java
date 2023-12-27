@@ -64,7 +64,12 @@ public class LevelData {
 
     public String GetData() {
         StringJoiner joiner = new StringJoiner(";");
-        joiner.add(String.valueOf(filename))
+        
+        String resultado = filename.replace("Level_", "");
+        resultado = resultado.replace("level_", "");
+        resultado = resultado.replace(".txt", "");
+        
+        joiner.add(String.valueOf(resultado))
             .add(String.valueOf(emptySpacePercentage))
             .add(String.valueOf(negativeSpacePercentage))
             .add(String.valueOf(interestingElementsPercentaje))
