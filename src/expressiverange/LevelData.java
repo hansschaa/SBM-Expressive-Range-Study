@@ -25,7 +25,9 @@ public class LevelData {
     public float leniency;
     public float linearity;
     public float avgEnemiesCompression;
+    public float enemyCount;
     public float density;
+    
     
     public LevelData(char[][] level, String filename) {
         this.level = level;
@@ -43,6 +45,7 @@ public class LevelData {
         leniency = MetricFactory.GetLeniency(this);
         linearity = MetricFactory.GetLinearity(this);
         avgEnemiesCompression = MetricFactory.GetEnemiesCompression(this);
+        enemyCount = Utils.CountLevelChars(this.level,new char[]{'E', 'S'} );
         density = MetricFactory.GetDensity(this);
     }
     
@@ -55,6 +58,7 @@ public class LevelData {
         System.out.println("-> Leniency: " + leniency);
         System.out.println("-> Linearity: " + linearity);
         System.out.println("-> Enemies Compression: " + avgEnemiesCompression);
+        System.out.println("-> Enemies Count: " + enemyCount);
         System.out.println("-> Density: " + density);
     }
     
@@ -77,6 +81,7 @@ public class LevelData {
             .add(String.valueOf(linearity))
             .add(String.valueOf(leniency))
             .add(String.valueOf(avgEnemiesCompression))
+            .add(String.valueOf(enemyCount))
             .add(String.valueOf(density));
         var exData = joiner.toString().replace('.', ',');
         return exData;
@@ -103,6 +108,9 @@ public class LevelData {
         
         //Avg enemies
         avgEnemiesCompression/=MetricFactory.maxAvgEnemiesCompression;
+        
+        //Enemy Count
+        enemyCount/=MetricFactory.maxEnemyCount;
         
         //Density
         density/=MetricFactory.maxDensity;

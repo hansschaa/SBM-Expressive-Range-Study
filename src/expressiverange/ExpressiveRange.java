@@ -19,7 +19,7 @@ public class ExpressiveRange {
     public static void main(String[] args) {
         
         ArrayList<LevelData> importedLevels = new ArrayList<>();
-        String csvFields = "ID;Empty Spaces;Negative Space;Interesting Elements;Significant Jumps;Linearity;Leniency;Avg Enemy Comp;Density";
+        String csvFields = "ID;Empty Spaces;Negative Space;Interesting Elements;Significant Jumps;Linearity;Leniency;Avg Enemy Comp;Enemy Count;Density";
     
         String directory = "Levels"; // Directory containing the files
         File folder = new File(directory);

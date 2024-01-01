@@ -19,6 +19,7 @@ public class MetricFactory {
     public static float maxLeniency;
     public static float maxLinearity;
     public static float maxAvgEnemiesCompression;
+    public static float maxEnemyCount;
     public static float maxDensity;
     
     public static float GetEmptySpaceFrecuency(LevelData levelData){
@@ -53,7 +54,7 @@ public class MetricFactory {
     }
     
     public static float GetInterestingTiles(LevelData levelData){
-        float coinandblockscount = Utils.CountLevelChars(levelData.level, new char[]{'B','C', 'E'});
+        float coinandblockscount = Utils.CountLevelChars(levelData.level, new char[]{'B','C', 'E', 'P', 'S'});
         return coinandblockscount/levelData.totalTiles;
     }
     
@@ -78,7 +79,7 @@ public class MetricFactory {
         significantJumps-=1;
         
         //Add enemies
-        significantJumps+= Utils.CountLevelChars(levelData.level, 'E');
+        significantJumps+= Utils.CountLevelChars(levelData.level, new char[]{'E', 'S'});
 
         return significantJumps;
     }
@@ -191,6 +192,7 @@ public class MetricFactory {
         maxLinearity = firstElement.linearity;
         maxLeniency = firstElement.leniency;
         maxAvgEnemiesCompression = firstElement.avgEnemiesCompression;
+        maxEnemyCount = firstElement.enemyCount;
         maxDensity = firstElement.density;
         
         // Itera sobre la lista para encontrar el máximo valor del campo específico
@@ -215,6 +217,9 @@ public class MetricFactory {
             }
             if (levelData.avgEnemiesCompression > maxAvgEnemiesCompression) {
                 maxAvgEnemiesCompression = levelData.avgEnemiesCompression;
+            }
+            if (levelData.enemyCount > maxEnemyCount) {
+                maxEnemyCount = levelData.enemyCount;
             }
             if (levelData.density > maxDensity) {
                 maxDensity = levelData.density;
