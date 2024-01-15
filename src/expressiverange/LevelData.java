@@ -88,6 +88,11 @@ public class LevelData {
     }
 
     void Normalize() {
+        
+        //Fix negative values in Leniency
+        leniency+=Math.abs(MetricFactory.minLeniency);
+        
+        
         //Empty Space
         emptySpacePercentage/=MetricFactory.maxEmptySpacePercentage;
         
@@ -101,10 +106,11 @@ public class LevelData {
         significantJumpsCount/=MetricFactory.maxSignificantJumpsCount;
         
         //Leniency
-        leniency/=MetricFactory.maxLeniency;
+        leniency /= MetricFactory.maxLeniency;
         
         //Linearity
         linearity/=MetricFactory.maxLinearity;
+        linearity=1 - linearity;
         
         //Avg enemies
         avgEnemiesCompression/=MetricFactory.maxAvgEnemiesCompression;

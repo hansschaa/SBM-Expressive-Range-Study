@@ -17,6 +17,7 @@ public class MetricFactory {
     public static float maxInterestingElementsPercentaje;
     public static float maxSignificantJumpsCount;
     public static float maxLeniency;
+    public static float minLeniency;
     public static float maxLinearity;
     public static float maxAvgEnemiesCompression;
     public static float maxEnemyCount;
@@ -131,6 +132,8 @@ public class MetricFactory {
         }
 
         float linealidad = sumaDiferencias / (levelData.heights.length - 1);
+        
+        
         return linealidad;
     }
 
@@ -138,6 +141,8 @@ public class MetricFactory {
         int margin = 5;
         float totalEnemies = Utils.CountLevelChars(levelData.level, new char[]{'E','S'});
         float totalCompression = 0;
+        if(totalEnemies == 0)
+            return totalCompression;
         
         for (int j = 0; j < levelData.enemiesPos.length; j++) {
             if (levelData.enemiesPos[j] == 1) {
@@ -181,7 +186,7 @@ public class MetricFactory {
         return colCountDensity;
     }
     
-    public static void ComputeMaximum( ArrayList<LevelData> importedLevels){
+    public static void ComputeMaximumMinimum(ArrayList<LevelData> importedLevels){
         
         var firstElement = importedLevels.get(0);
         
@@ -191,6 +196,7 @@ public class MetricFactory {
         maxSignificantJumpsCount = firstElement.significantJumpsCount;
         maxLinearity = firstElement.linearity;
         maxLeniency = firstElement.leniency;
+        minLeniency = firstElement.leniency;
         maxAvgEnemiesCompression = firstElement.avgEnemiesCompression;
         maxEnemyCount = firstElement.enemyCount;
         maxDensity = firstElement.density;
@@ -215,6 +221,10 @@ public class MetricFactory {
             if (levelData.leniency < maxLeniency) {
                 maxLeniency = levelData.leniency;
             }
+            if (levelData.leniency > minLeniency) {
+                minLeniency = levelData.leniency;
+            }
+    
             if (levelData.avgEnemiesCompression > maxAvgEnemiesCompression) {
                 maxAvgEnemiesCompression = levelData.avgEnemiesCompression;
             }
@@ -226,4 +236,5 @@ public class MetricFactory {
             }
         }
     }
+
 }

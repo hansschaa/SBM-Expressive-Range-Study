@@ -45,7 +45,7 @@ public class ExpressiveRange {
         }
 
         //Normalize
-        MetricFactory.ComputeMaximum(importedLevels);
+        MetricFactory.ComputeMaximumMinimum(importedLevels);
         
         //Export LevelData to .csv
         String[] levelDataList = new String[importedLevels.size()+1];
