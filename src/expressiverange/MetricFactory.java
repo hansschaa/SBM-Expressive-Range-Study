@@ -218,13 +218,13 @@ public class MetricFactory {
             if (levelData.linearity > maxLinearity) {
                 maxLinearity = levelData.linearity;
             }
-            if (levelData.leniency < maxLeniency) {
+            if (levelData.leniency > maxLeniency) {
                 maxLeniency = levelData.leniency;
             }
-            if (levelData.leniency > minLeniency) {
+            if (levelData.leniency < minLeniency) {
                 minLeniency = levelData.leniency;
             }
-    
+
             if (levelData.avgEnemiesCompression > maxAvgEnemiesCompression) {
                 maxAvgEnemiesCompression = levelData.avgEnemiesCompression;
             }
@@ -235,6 +235,14 @@ public class MetricFactory {
                 maxDensity = levelData.density;
             }
         }
+        
+        // Leniency fix
+        for (LevelData levelData : importedLevels) {
+            levelData.leniency += Math.abs(minLeniency);
+        }
+        
+        maxLeniency += Math.abs(minLeniency);
+     
     }
 
 }

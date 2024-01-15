@@ -89,10 +89,6 @@ public class LevelData {
 
     void Normalize() {
         
-        //Fix negative values in Leniency
-        leniency+=Math.abs(MetricFactory.minLeniency);
-        
-        
         //Empty Space
         emptySpacePercentage/=MetricFactory.maxEmptySpacePercentage;
         
