@@ -143,8 +143,8 @@ public class LevelData {
         
         //Leniency
         //leniency /= MetricFactory.maxLeniency;
-        leniency = (leniency) / 
-                (MetricFactory.leniency.max );
+        leniency = (leniency - MetricFactory.leniency.min) / 
+                (MetricFactory.leniency.max - MetricFactory.leniency.min);
         //leniency = 1 - leniency;
         
         //Linearity

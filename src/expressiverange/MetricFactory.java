@@ -262,7 +262,6 @@ public class MetricFactory {
 
         // Itera sobre la lista para encontrar el máximo valor del campo específico
         for (LevelData levelData : importedLevels) {
-
             CheckMetric(emptySpacePercentage,levelData.emptySpacePercentage );
             CheckMetric(negativeSpacePercentage,levelData.negativeSpacePercentage);
             CheckMetric(interestingElementsPercentaje,levelData.interestingElementsPercentaje);
@@ -273,13 +272,6 @@ public class MetricFactory {
             CheckMetric(enemyCount,levelData.enemyCount);
             CheckMetric(density,levelData.density);
         }
-        
-        // Leniency fix
-        for (LevelData levelData : importedLevels) {
-            levelData.leniency += Math.abs(leniency.min);
-        }
-        
-        leniency.max += Math.abs(leniency.min);
         
         System.out.println("Max: " + leniency.max);
         System.out.println("Min: " + leniency.min);
