@@ -151,7 +151,7 @@ public class LevelData {
         //linearity/=MetricFactory.maxLinearity;
         linearity = (linearity - MetricFactory.linearity.min) / 
                 (MetricFactory.linearity.max - MetricFactory.linearity.min);
-        //linearity=1 - linearity;
+        linearity=1 - linearity;
         
         //Avg enemies
         //avgEnemiesCompression/=MetricFactory.maxAvgEnemiesCompression;

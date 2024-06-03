@@ -164,7 +164,7 @@ public class MetricFactory {
                 for(int jj = bottomLimit; jj < upperLimit ; jj++){
                     if(jj != j && levelData.enemiesPos[jj] == 1)
                     {
-                        totalCompression += Math.abs(j-jj);
+                        totalCompression += ((margin+1) - Math.abs(j-jj));
                     }    
                 }
             }
