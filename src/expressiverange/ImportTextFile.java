@@ -51,18 +51,59 @@ public class ImportTextFile {
     }
     
     public static void exportDataToCSV(String[] dataList, String fileName) {
-        
+        String csvFields = "ID;Empty Spaces;Negative Space;Interesting Elements;Significant Jumps;Linearity;Lenience;Avg Enemy Comp;Enemy Count;Density";
 
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        String fileNamePrefix = "";
+        int rowCount = 0;
+        int fileIndex = 1;
+        BufferedWriter writer = null;
+        try {
             for (String data : dataList) {
+                if (rowCount == 0 || rowCount == 200 || rowCount == 400 || rowCount == 600) {
+                    if (writer != null) {
+                        writer.close();
+                    }
+                    switch(fileIndex){
+                        case 1:
+                            fileNamePrefix = "data - ga";
+                            break;
+                        case 2:
+                            fileNamePrefix = "data - mc";
+                            break;
+                        case 3:
+                            fileNamePrefix = "data - gan";
+                            break;
+                        case 4:
+                            fileNamePrefix = "data - smb";
+                            break;
+                    }
+                    
+                    writer = new BufferedWriter(new FileWriter(fileNamePrefix +".csv"));
+                    writer.write(csvFields);
+                    writer.newLine();
+                    fileIndex++;
+                }
                 writer.write(data);
                 writer.newLine();
+                rowCount++;
             }
 
-            System.out.println("Data successfully exported to " + fileName);
+            if (writer != null) {
+                writer.close();
+            }
+
+            System.out.println("Data successfully exported");
         } catch (IOException e) {
             System.err.println("Error exporting data to CSV: " + e.getMessage());
+        } finally {
+            // Ensure the writer is closed in case of an exception
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    System.err.println("Error closing the writer: " + e.getMessage());
+                }
+            }
         }
     }
 }

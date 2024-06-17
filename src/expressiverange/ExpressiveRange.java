@@ -6,6 +6,8 @@ package expressiverange;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -19,7 +21,6 @@ public class ExpressiveRange {
     public static void main(String[] args) {
         
         ArrayList<LevelData> importedLevels = new ArrayList<>();
-        String csvFields = "ID;Empty Spaces;Negative Space;Interesting Elements;Significant Jumps;Linearity;Leniency;Avg Enemy Comp;Enemy Count;Density";
     
         String directory = "Levels"; // Directory containing the files
         File folder = new File(directory);
@@ -33,7 +34,7 @@ public class ExpressiveRange {
                     if (file.isFile() && file.getName().endsWith(".txt")) {
                         char[][] level = ImportTextFile.leerMatrizDesdeArchivo(directory + "\\" + file.getName());
 
-                        LevelData levelData = new LevelData(level, file.getName());
+                        LevelData levelData = new LevelData(level, (cont+1)+ "");
                         levelData.ComputeMetrics();
                         importedLevels.add(levelData);
                         cont++;
@@ -49,13 +50,20 @@ public class ExpressiveRange {
         
         
         //Export LevelData to .csv
-        String[] levelDataList = new String[importedLevels.size()+1];
-        levelDataList[0] = csvFields;
+        String[] levelDataList = new String[importedLevels.size()];
+        //levelDataList[0] = csvFields;
         for(int i = 0 ; i < importedLevels.size(); i++){
             importedLevels.get(i).Normalize2();
-            
-            levelDataList[i+1] = importedLevels.get(i).GetData();
+            levelDataList[i] = importedLevels.get(i).GetData();
         }
+        
+         // Ordenar el ArrayList por el campo Id
+        Collections.sort(importedLevels, new Comparator<LevelData>() {
+            @Override
+            public int compare(LevelData o1, LevelData o2) {
+                return Integer.compare(Integer.parseInt(o1.filename), Integer.parseInt(o2.filename));
+            }
+        });
         
         ImportTextFile.exportDataToCSV(levelDataList, "data.csv");
     }
